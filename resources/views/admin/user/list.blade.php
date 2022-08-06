@@ -5,11 +5,7 @@
 @section('content-title', 'Quản lý người dùng')
 
 @section('content')
-    <div class='my-3'>
-        <a href="{{ route('product_create') }}">
-            <button class='btn btn-success'>Tạo mới</button>
-        </a>
-    </div>
+    
     <table class='table'>
         <thead>
             <tr>
@@ -70,7 +66,7 @@
             @endforeach
         </tbody>
     </table>
-    {{-- <div>
-        {{ $user_list->links() }}
-    </div> --}}
+    <div>
+        {{$user_list->links() }}
+    </div>
 @endsection

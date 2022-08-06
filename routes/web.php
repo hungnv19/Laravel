@@ -55,8 +55,11 @@ Route::prefix('/dashboard')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
    
     // user
+    
+
+
     Route::get('/user', [UserController::class, 'index'])->name('user_list');
-    Route::delete('/user/delete/{user}', [UserController::class, 'delete'])->name('delete'); //name: users.delete
+    Route::delete('/user/delete/{user}', [UserController::class, 'delete'])->name('user_delete'); //name: users.delete
 
     // //admin
     // Route::get('/admin/list', [UserController::class, 'adminindex'])->name('admin_list');
