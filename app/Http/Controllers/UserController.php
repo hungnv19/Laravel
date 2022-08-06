@@ -8,9 +8,14 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = User::where('role', 1)->get();
+        $user = User::get();
         return view('admin.user.list', [
             'user_list' => $user
         ]);
+    }
+    public function delete(User $user) {
+        if($user->delete()) {
+            return redirect()->back();
+        }
     }
 }

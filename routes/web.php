@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +55,9 @@ Route::prefix('/dashboard')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
    
     // user
-    Route::get('/user/list', [UserController::class, 'index'])->name('user_list');
+    Route::get('/user', [UserController::class, 'index'])->name('user_list');
+    Route::delete('/user/delete/{user}', [UserController::class, 'delete'])->name('delete'); //name: users.delete
+
     // //admin
     // Route::get('/admin/list', [UserController::class, 'adminindex'])->name('admin_list');
     // Route::get('/admin/create', [UserController::class, 'admincreate'])->name('admin_create');
@@ -62,24 +68,24 @@ Route::prefix('/dashboard')->group(function(){
     // Route::get('/user/status/{user}', [UserController::class, 'status'])->name('user_status');
 
     // product
-    // Route::get('/product/list', [ProductController::class, 'list'])->name('product_list');
-    // Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product_delete');
+    Route::get('/product', [ProductController::class, 'list'])->name('product_list');
+    Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product_delete');
     // Route::post('/product/deleteall', [ProductController::class, 'deleteall'])->name('product_deleteall');
-    // Route::get('/product/create', [ProductController::class, 'create'])->name('product_create');
-    // Route::post('/product/store', [ProductController::class, 'store'])->name('product_store');
-    // Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product_edit');
-    // Route::post('/product/update/{product}', [ProductController::class, 'update'])->name('product_update');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('product_create');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('product_store');
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product_edit');
+    Route::post('/product/update/{product}', [ProductController::class, 'update'])->name('product_update');
 
     // search
     // Route::get('/product/search', [ProductController::class, 'search'])->name('search');
 
     // category
-    // Route::get('/danhmuc/list', [DanhmucController::class, 'list'])->name('danhmuc_list');
-    // Route::get('/danhmuc/create', [DanhmucController::class, 'create'])->name('danhmuc_create');
-    // Route::post('/danhmuc/store', [DanhmucController::class, 'store'])->name('danhmuc_store');
-    // Route::get('/danhmuc/edit/{id}', [DanhmucController::class, 'edit'])->name('danhmuc_edit');
-    // Route::post('/danhmuc/update/{id}', [DanhmucController::class, 'update'])->name('danhmuc_update');
-    // Route::get('/danhmuc/delete/{id}', [DanhmucController::class, 'delete'])->name('danhmuc_delete');
+    Route::get('/category', [CategoryController::class, 'list'])->name('category_list');
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('category_create');
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('category_store');
+    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category_edit');
+    Route::post('/category/update/{category}', [CategoryController::class, 'update'])->name('category_update');
+    Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category_delete');
     
     // size
     // Route::get('/kichthuoc/list', [KichthuocController::class, 'list'])->name('kichthuoc_list');

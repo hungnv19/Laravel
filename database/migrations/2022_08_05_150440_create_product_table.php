@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('describe'); // mo ta
             $table->integer('promotion')->nullable(); //khuyen mai
             $table->unsignedBigInteger('category_id');
-            // $table->foreign('category_id')->references('id')->on('category');
-            $table->unsignedBigInteger('size');
+            $table->foreign('category_id')->references('id')->on('category');
+            $table->integer('size');
             $table->timestamps();
         });
     }
