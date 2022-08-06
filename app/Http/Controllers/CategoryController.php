@@ -24,7 +24,7 @@ class CategoryController extends Controller
         $category->fill([
             'name' => $request->name
         ])->save();
-        return redirect()->route('category_list');
+        return redirect()->route('category.list');
     }
     public function edit(Request $request)
     {
@@ -33,15 +33,16 @@ class CategoryController extends Controller
             'category' => $category
         ]);
     }
-    public function update(Request $request)
+    public function update(Request $request, Category $category)
     {
-        Category::find($request->id)->update($request->all());
-        return redirect()->route('category_list');
+        $category->find($request->id)->update($request->all());
+        $category->save();
+        return redirect()->route('category.list');
     }
     public function delete(Request $request)
     {
         Category::destroy($request->id);
-        return redirect()->route('category_list');
+        return redirect()->route('category.list');
     }
 }
 

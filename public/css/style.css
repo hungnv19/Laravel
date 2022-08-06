@@ -1153,6 +1153,7 @@ ol {
 -----------------------*/
 
 .shop__sidebar {
+	
 	padding-right: 20px;
 }
 
@@ -2061,6 +2062,7 @@ ol {
 .breadcrumb-option {
 	background: #f3f2ee;
 	padding: 40px 0;
+	
 }
 
 .breadcrumb__text h4 {
@@ -2096,6 +2098,7 @@ ol {
 -----------------------*/
 
 .breadcrumb-blog {
+	
 	text-align: center;
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -2217,6 +2220,7 @@ ol {
 }
 
 .counter .container {
+	
 	border-bottom: 1px solid #e5e5e5;
 	padding-bottom: 70px;
 }

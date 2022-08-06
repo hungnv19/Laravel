@@ -30,88 +30,16 @@
    
 
     <!-- Header Section Begin -->
-    <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-7">
-                        <div class="header__top__left">
-                            <p>HOTLINE: (+84) 0962523872
+    @include('layout.header')
 
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-5">
-                        <div class="header__top__right">
-                            <div class="header__top__links">
-                                <a href="{{asset('/login')}}">Sign in</a>
-                                <a href="">FAQs</a>
-                            </div>
-                            <div class="header__top__hover">
-                                <span>VNĐ<i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li>USD</li>
-                                    <li>VNĐ</li>
-                                   
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-3">
-                    <div class="header__logo">
-                        <a href="{{asset('/')}}"><img src="img/noi-that/logo.png" width="160px" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <nav class="header__menu mobile-menu">
-                        <ul>
-                            <li class="active"><a href="{{asset('/')}}">Home</a></li>
-                            <li><a href="{{asset('/shop')}}">Shop</a></li>
-                            <li><a href="{{asset('/about')}}">Giới Thiệu</a> </li>
-                            <li><a href="{{asset('/blog')}}">Tin Tức</a></li>
-                            <li><a href="{{asset('/contact')}}">Liên Hệ</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="header__nav__option">
-                        <a href="" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                        <a href=""><img src="img/icon/heart.png" alt=""></a>
-                        <a href="{{asset('/cart')}}"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
-                    </div>
-                </div>
-            </div>
-            <div class="canvas__open"><i class="fa fa-bars"></i></div>
-        </div>
-    </header>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__text">
-                        <h4>Shop</h4>
-                        <div class="breadcrumb__links">
-                            <a href="./index.html">Home</a>
-                            <span>Shop</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
     <!-- Breadcrumb Section End -->
 
     <!-- Shop Section Begin -->
-    <section class="shop spad">
+    {{-- <section class="shop spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -649,79 +577,14 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
+
+    @yield('content')
+
     <!-- Shop Section End -->
 
     <!-- Footer Section Begin -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="#"><img src="img/noi-that/logo.png"  width="100px" alt=""></a>
-                        </div>
-                        <p>Nội thất Hàn Quốc Online Số 1 Tại Việt Nam.</p>
-                        <p>Địa chỉ: Số 15 - Ngõ 80 Xuân Phương - Nam Từ Liêm - Hà Nội</p>
-                        <p>Hotline: 0962523872</p>
-                        <a href="#"><img src="img/payment.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
-                    <div class="footer__widget">
-                    
-                        <h6>Thông tin</h6>
-                        <ul>
-                            <li><a href="#">Về chúng tôi</a></li>
-                            <li><a href="#">Thông tin liên hệ</a></li>
-                            <li><a href="#">Hướng dẫn mua hàng</a></li>
-                        
-                            <li><a href="#">Sản phẩm khuyến mãi</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>CHÍNH SÁCH</h6>
-                        <ul>
-                            <li><a href="#">Chính sách thanh toán</a></li>
-                            <li><a href="#">CS Bảo hành & Đổi trả</a></li>
-                            <li><a href="#">Chính sách vận chuyển</a></li>
-                            <li><a href="#">Chính sách bảo mật</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>NewLetter</h6>
-                        <div class="footer__newslatter">
-                            <p>Hãy để lại email của bạn để nhận được những ý tưởng trang trí mới và những thông tin, ưu đãi</p>
-                            <p>Email: hungnvph14820@fpt.edu.vn</p>
-                            <form action="#">
-                                <input type="text" placeholder="Your email">
-                                <button type="submit"><span class="icon_mail_alt"></span></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="footer__copyright__text">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        <p>Copyright ©
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script>2020
-                            All rights reserved | This template is made with <i class="fa fa-heart-o"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">HUNG NGUYEN</a>
-                        </p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @include('layout.footer')
     <!-- Footer Section End -->
 
     <!-- Search Begin -->

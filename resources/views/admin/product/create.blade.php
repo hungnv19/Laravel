@@ -6,7 +6,7 @@
 
 @section('content')
     <form 
-    action="{{ isset($product) ? route('product_update', $product->id) : route('product_store') }}
+    action="{{ isset($product) ? route('product.update', $product->id) : route('product.store') }}
     " method="POST"
         enctype="multipart/form-data">
         @csrf
@@ -64,7 +64,7 @@
 
         <div>
             <button class='btn btn-primary'>{{ isset($product) ? 'Cập nhật' : 'Tạo mới' }}</button>
-            <button type='reset' class='btn btn-warning'>Nhập lại</button>
+            {{-- <button type='reset' class='btn btn-warning'>Nhập lại</button> --}}
         </div>
 
 

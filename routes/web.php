@@ -23,25 +23,25 @@ Route::get('/', function () {
     return view('layout.master');
 });
 Route::get('/shop', function () {
-    return view('layout.shop');
+    return view('client.shop');
 });
 Route::get('/shop-detail', function () {
-    return view('layout.shop-detail');
+    return view('client.shop-detail');
 });
 Route::get('/cart', function () {
-    return view('layout.shopping-cart');
+    return view('client.shopping-cart');
 });
 Route::get('/about', function () {
-    return view('layout.about');
+    return view('client.about');
 });
 Route::get('/contact', function () {
-    return view('layout.contact');
+    return view('client.contact');
 });
 Route::get('/blog', function () {
-    return view('layout.blog');
+    return view('client.blog');
 });
 Route::get('/login', function () {
-    return view('layout.login');
+    return view('client.login');
 });
 
 
@@ -55,11 +55,36 @@ Route::prefix('/dashboard')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
    
     // user
+    Route::prefix('/user')->name('user.')->group(function(){
+        Route::get('/', [UserController::class, 'index'])->name('list');
+        Route::delete('/delete/{user}', [UserController::class, 'delete'])->name('delete'); //name: users.delete
+        Route::get('/status/{user}', [UserController::class, 'status'])->name('status');
+    });
+
+    //product
+
+    Route::prefix('/product')->name('product.')->group(function(){
+        Route::get('/', [ProductController::class, 'list'])->name('list');
+        Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+        // Route::post('/product/deleteall', [ProductController::class, 'deleteall'])->name('product_deleteall');
+        Route::get('/create', [ProductController::class, 'create'])->name('create');
+        Route::post('/store', [ProductController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+        Route::put('/update/{product}', [ProductController::class, 'update'])->name('update');
+    });
+
+
+    //category
+    Route::prefix('/category')->name('category.')->group(function(){
+        Route::get('/', [CategoryController::class, 'list'])->name('list');
+        Route::get('/create', [CategoryController::class, 'create'])->name('create');
+        Route::post('/store', [CategoryController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
+        Route::put('/update/{category}', [CategoryController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
     
-
-
-    Route::get('/user', [UserController::class, 'index'])->name('user_list');
-    Route::delete('/user/delete/{user}', [UserController::class, 'delete'])->name('user_delete'); //name: users.delete
+    });
+   
 
     // //admin
     // Route::get('/admin/list', [UserController::class, 'adminindex'])->name('admin_list');
@@ -68,35 +93,29 @@ Route::prefix('/dashboard')->group(function(){
     // Route::get('/admin/edit/{id}', [UserController::class, 'adminedit'])->name('admin_edit');
     // Route::get('/admin/delete/{id}', [UserController::class, 'admindelete'])->name('admin_delete');
     // Route::post('/admin/admin_update/{id}', [UserController::class, 'adminupdate'])->name('admin_update');
-    // Route::get('/user/status/{user}', [UserController::class, 'status'])->name('user_status');
+    
 
     // product
-    Route::get('/product', [ProductController::class, 'list'])->name('product_list');
-    Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product_delete');
-    // Route::post('/product/deleteall', [ProductController::class, 'deleteall'])->name('product_deleteall');
-    Route::get('/product/create', [ProductController::class, 'create'])->name('product_create');
-    Route::post('/product/store', [ProductController::class, 'store'])->name('product_store');
-    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product_edit');
-    Route::post('/product/update/{product}', [ProductController::class, 'update'])->name('product_update');
+    // Route::get('/product', [ProductController::class, 'list'])->name('product_list');
+    // Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product_delete');
+    // // Route::post('/product/deleteall', [ProductController::class, 'deleteall'])->name('product_deleteall');
+    // Route::get('/product/create', [ProductController::class, 'create'])->name('product_create');
+    // Route::post('/product/store', [ProductController::class, 'store'])->name('product_store');
+    // Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product_edit');
+    // Route::post('/product/update/{product}', [ProductController::class, 'update'])->name('product_update');
 
     // search
     // Route::get('/product/search', [ProductController::class, 'search'])->name('search');
 
-    // category
-    Route::get('/category', [CategoryController::class, 'list'])->name('category_list');
-    Route::get('/category/create', [CategoryController::class, 'create'])->name('category_create');
-    Route::post('/category/store', [CategoryController::class, 'store'])->name('category_store');
-    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category_edit');
-    Route::post('/category/update/{category}', [CategoryController::class, 'update'])->name('category_update');
-    Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category_delete');
+    // // category
+    // Route::get('/category', [CategoryController::class, 'list'])->name('category_list');
+    // Route::get('/category/create', [CategoryController::class, 'create'])->name('category_create');
+    // Route::post('/category/store', [CategoryController::class, 'store'])->name('category_store');
+    // Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category_edit');
+    // Route::post('/category/update/{category}', [CategoryController::class, 'update'])->name('category_update');
+    // Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category_delete');
     
-    // size
-    // Route::get('/kichthuoc/list', [KichthuocController::class, 'list'])->name('kichthuoc_list');
-    // Route::get('/kichthuoc/create', [KichthuocController::class, 'create'])->name('kichthuoc_create');
-    // Route::post('/kichthuoc/store', [KichthuocController::class, 'store'])->name('kichthuoc_store');
-    // Route::get('/kichthuoc/edit/{id}', [KichthuocController::class, 'edit'])->name('kichthuoc_edit');
-    // Route::post('/kichthuoc/update/{id}', [KichthuocController::class, 'update'])->name('kichthuoc_update');
-    // Route::get('/kichthuoc/delete/{id}', [KichthuocController::class, 'delete'])->name('kichthuoc_delete');
+  
 
     // đơn hàng
     // Route::get('/don-hang/list', [DonhangController::class, 'list'])->name('donhang_list');

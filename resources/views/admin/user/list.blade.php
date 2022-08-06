@@ -5,7 +5,7 @@
 @section('content-title', 'Quản lý người dùng')
 
 @section('content')
-    
+
     <table class='table'>
         <thead>
             <tr>
@@ -25,48 +25,36 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->birthday }}</td>
-                    {{-- <td>{{$user->username}}</td> --}}
                     <td>{{ $user->email }}</td>
                     <td><img src="{{ asset($user->avatar) }}" alt="" width="100"></td>
-                    <!-- Nếu chỉ select và paginate thì ở đây mới thực hiện truy vấn -->
-                    <!-- N+1 Query để lấy ra danh sách kèm thông tin của quan hệ -->
-
-                    {{-- <td>
-                        <a href="">
-                            <button class='btn btn-warning'>Chỉnh sửa</button>
-                        </a>
-                        <form
-                            action="{{route('user.delete', $user->id)}}"
-                            method="post"
-                        >
-                            @csrf
-                            @method('DELETE')
-                            <button class='btn btn-danger'>Xoá</button>
-                        </form>
-                    </td> --}}
                     <td>
                         @if ($user->status == 1)
-                            {{-- {{ route('user_status', $user) }} --}}
-                            <a href=""><button class="btn btn-primary"
+                            <a href="{{route('user.status', $user)}}"><button class="btn btn-primary"
                                     onclick="return confirm('Bạn có chắc chắn muốn thay đổi không')">Đang hoạt
                                     dộng</button></a>
                         @else
-                            {{-- {{ route('user_status', $user) }} --}}
-                            <a href=""><button class="btn btn-danger"
+                            <a href="{{route('user.status', $user)}}"><button class="btn btn-danger"
                                     onclick="return confirm('Bạn có chắc chắn muốn thay đổi không')">Đã
                                     khóa</button></a>
                         @endif
                     </td>
-                    <td>
-                        {{-- {{ route('admin_delete', $user->id) }} --}}
-                        <a href="" onclick="return confirm('Bạn có chắc muốn xóa')">
+                    {{-- <td>
+
+                        <a href="{{ route('user.delete', $user->id) }}" onclick="return confirm('Bạn có chắc muốn xóa')">
                             <i class="fas fa-trash"> XÓA</i></a>
+                    </td> --}}
+                    <td>
+                        <form action="{{ route('user.delete', $user->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class='btn btn-danger'>Xoá</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     <div>
-        {{$user_list->links() }}
+        {{ $user_list->links() }}
     </div>
 @endsection

@@ -6,7 +6,7 @@
 
 @section('content')
     <div class='my-3'>
-        <a href="{{route('product_create')}}">
+        <a href="{{route('product.create')}}">
             <button class='btn btn-success'>Tạo mới</button>
         </a>
     </div>
@@ -39,10 +39,11 @@
                     <td>{{$item->size}}</td>
                     <td>
                         <a href="">
-                            <button class='btn btn-warning'>Edit</button>
-                        </a>
+                            <a href="{{route('product.edit', $item->id)}}">
+                                <button class='btn btn-warning'>Chỉnh sửa</button>
+                            </a>
                         <form
-                            action="{{route('product_delete', $item->id)}}"
+                            action="{{route('product.delete', $item->id)}}"
                             method="post"
                         >
                             @csrf

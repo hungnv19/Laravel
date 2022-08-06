@@ -77,9 +77,32 @@ class ProductController extends Controller
         // 4. Lưu
         $product->save();
 
-        return redirect()->route('product_list');
+        return redirect()->route('product.list');
         // Lab: Thực hiện chức năng chỉnh sửa, method PUT, có dữ liệu của user hiện tại và lưu
 
+    }
+    public function edit(Request $request)
+    {
+        $category = Category::all();
+       
+        $product = Product::where('id', $request->id)->first();
+        return view('admin.product.create', [
+            'category' => $category,
+          
+            'product' => $product
+        ]);
+    }
+    public function update(Request $request, Product $product)
+    {
+        $product->fill($request->all());
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->avatar;
+            $avatarName = $avatar->hashName();
+            $avatarName = $product->name . '_' . $avatarName;
+            $product->avatar_product = $avatar->storeAs('images/product', $avatarName);
+        }
+        $product->save();
+        return redirect()->route('product.list');
     }
 
 }
