@@ -23,7 +23,7 @@ class ProductFactory extends Factory
             'avatar' => $this->faker->imageUrl(),
             'promotion' => rand(1,5),
             'describe' => $this->faker->text(64),
-            'category_id' => rand(0, 10),
+            'category_id' => rand(0, 5),
             'size' => rand(1, 3),
             
         ];

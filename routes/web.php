@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AuthController;
 
 use App\Models\Category;
 
@@ -40,15 +41,14 @@ Route::get('/contact', function () {
 Route::get('/blog', function () {
     return view('client.blog');
 });
-Route::get('/login', function () {
-    return view('client.login');
-});
-
-
-// Route::get('/admin', function () {
-//     // trả về view resources/views/welcome.blade.php
-//     return view('admin.master');
+// Route::get('/login', function () {
+//     return view('admin.auth.login');
 // });
+
+// Route::get('one_danhmuc/{id}', [DanhmucController::class, 'one_danhmuc'])->name('danhmuc');
+// Route::get('all_danhmuc', [DanhmucController::class, 'all_danhmuc'])->name('all_danhmuc');
+Route::get('category/{id}', [CategoryController::class, 'fill_category'])->name('fill_category');
+
 
 
 Route::prefix('/dashboard')->group(function(){
@@ -86,6 +86,7 @@ Route::prefix('/dashboard')->group(function(){
     });
    
 
+
     // //admin
     // Route::get('/admin/list', [UserController::class, 'adminindex'])->name('admin_list');
     // Route::get('/admin/create', [UserController::class, 'admincreate'])->name('admin_create');
@@ -95,27 +96,12 @@ Route::prefix('/dashboard')->group(function(){
     // Route::post('/admin/admin_update/{id}', [UserController::class, 'adminupdate'])->name('admin_update');
     
 
-    // product
-    // Route::get('/product', [ProductController::class, 'list'])->name('product_list');
-    // Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product_delete');
-    // // Route::post('/product/deleteall', [ProductController::class, 'deleteall'])->name('product_deleteall');
-    // Route::get('/product/create', [ProductController::class, 'create'])->name('product_create');
-    // Route::post('/product/store', [ProductController::class, 'store'])->name('product_store');
-    // Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product_edit');
-    // Route::post('/product/update/{product}', [ProductController::class, 'update'])->name('product_update');
+   
 
     // search
     // Route::get('/product/search', [ProductController::class, 'search'])->name('search');
 
-    // // category
-    // Route::get('/category', [CategoryController::class, 'list'])->name('category_list');
-    // Route::get('/category/create', [CategoryController::class, 'create'])->name('category_create');
-    // Route::post('/category/store', [CategoryController::class, 'store'])->name('category_store');
-    // Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category_edit');
-    // Route::post('/category/update/{category}', [CategoryController::class, 'update'])->name('category_update');
-    // Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category_delete');
     
-  
 
     // đơn hàng
     // Route::get('/don-hang/list', [DonhangController::class, 'list'])->name('donhang_list');
@@ -126,3 +112,17 @@ Route::prefix('/dashboard')->group(function(){
     // Route::get('thongke/order', [HomeController::class, 'allorder'])->name('orderall');
     // Route::get('thongke/order/complete', [HomeController::class, 'complete'])->name('complete');
 });
+
+
+// login
+Route::middleware('guest')->prefix('/auth')->name('auth.')->group(function () {
+    // Route::get('/', [AuthController::class, 'index'])->name('login');
+    Route::get('/login', [AuthController::class, 'getLogin'])->name('getLogin');
+    Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
+
+    // use Laravel\Socialite\Facades\Socialite;
+    // Route::get('/login-google', [AuthController::class, 'getLoginGoogle'])->name('getLoginGoogle');
+    // Route::get('/google/callback', [AuthController::class, 'loginGoogleCallback'])->name('loginGoogleCallback');
+});
+
+Route::get('/auth/logout', [AuthController::class, 'logout'])->middleware('auth');

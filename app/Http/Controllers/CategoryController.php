@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -43,6 +45,27 @@ class CategoryController extends Controller
     {
         Category::destroy($request->id);
         return redirect()->route('category.list');
+    }
+    public function fill_category(Request $request)
+    {
+        $category = Category::all();
+      
+        $fill_category = Product::where('category_id', $request->id)->with('category')->paginate(10);
+        // if (Auth::user()) {
+        //     $count_giohang = Giohang::where('id_user', Auth::user()->id)->get();
+        //     return view('clinet.san-pham', [
+        //         'danhmuc' => $danhmuc,
+        //         'product' => $fill_danhmuc,
+        //         'kichthuoc' => $kichthuoc,
+        //         'count_giohang' => $count_giohang
+        //     ]);
+        // } else {
+            return view('client.shop', [
+                'category' => $category,
+                'product' => $fill_category,
+                
+            ]);
+        // }
     }
 }
 

@@ -6,17 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tạo tài khoản</title>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <script src="js/jquery-3.6.0.min.js"></script>
     <style>
-    
         @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
         * {
@@ -281,9 +280,17 @@
 
 <body>
     <br>
-
+    <div>
+        @if ($errors->any())
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
     <div class="container" id="container">
-        <div class="form-container sign-up-container">
+        {{-- <div class="form-container sign-up-container">
             <form action="#"  >
                 <h1>Tạo tài khoản</h1>
                 <div class="social-container">
@@ -300,23 +307,31 @@
                 <input type="password" placeholder="Password" id="password" />
                 <button type="submit">Đăng ký</button>
             </form>
-        </div> 
+        </div> --}}
         <div class="form-container sign-in-container">
-            <form action="#" id="form-login" method="POST">
+            <form action="{{ route('auth.postLogin') }}" id="form-login" 
+            method="POST">
+                @csrf
                 <h1>ĐĂNG NHẬP</h1>
                 <div class="social-container">
-                    <a href="#" class="social"><img src="img/icon/—Pngtree—facebook icon facebook logo_3560488.png" alt=""
+                    <a href="#" class="social"><img
+                            src="img/icon/—Pngtree—facebook icon facebook logo_3560488.png" alt=""
                             width="40px"></a>
-                    <a href="#" class="social"><img src="img/icon/—Pngtree—instagram icon instagram logo_3584852.png"
-                            alt="" width="40px"></a>
-                    <a href="#" class="social"><img src="img/icon/—Pngtree—social media network app icon_5521223.png"
-                            alt="" width="40px"></a>
+                    <a href="#" class="social"><img
+                            src="img/icon/—Pngtree—instagram icon instagram logo_3584852.png" alt=""
+                            width="40px"></a>
+                    <a href="#" class="social"><img
+                            src="img/icon/—Pngtree—social media network app icon_5521223.png" alt=""
+                            width="40px"></a>
                 </div>
-                <span>Bạn đã có tài khoản?</span>
-                <input type="email" placeholder="Email" id="email" />
-                <input type="password" placeholder="Password" id="password" />
-                <a href="#">Bạn quên mật khẩu?</a>
-                <button type="submits">Đăng nhập</button>
+                
+                <input type="text" placeholder="Email" id="email" name="email" value="{{old('email')}}"/>
+                @if ($errors->has('email'))
+                    <span>{{ $errors->first('email') }}</span>
+                @endif
+                <input type="password" placeholder="Password" id="password" name="password" />
+              
+                <button >Đăng nhập</button>
             </form>
         </div>
         <div class="overlay-container">
