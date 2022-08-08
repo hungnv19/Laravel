@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CartController;
 
 use App\Models\Category;
 
@@ -20,18 +22,18 @@ use App\Models\Category;
 |
 */
 
-Route::get('/', function () {
-    return view('layout.master');
-});
-Route::get('/shop', function () {
-    return view('client.shop');
-});
-Route::get('/shop-detail', function () {
-    return view('client.shop-detail');
-});
-Route::get('/cart', function () {
-    return view('client.shopping-cart');
-});
+// Route::get('/', function () {
+//     return view('layout.master');
+// });
+// Route::get('/shop', function () {
+//     return view('client.shop');
+// });
+// Route::get('/shop-detail', function () {
+//     return view('client.shop-detail');
+// });
+// Route::get('/cart', function () {
+//     return view('client.shopping-cart');
+// });
 Route::get('/about', function () {
     return view('client.about');
 });
@@ -41,21 +43,31 @@ Route::get('/contact', function () {
 Route::get('/blog', function () {
     return view('client.blog');
 });
-// Route::get('/login', function () {
-//     return view('admin.auth.login');
-// });
 
-// Route::get('one_danhmuc/{id}', [DanhmucController::class, 'one_danhmuc'])->name('danhmuc');
-// Route::get('all_danhmuc', [DanhmucController::class, 'all_danhmuc'])->name('all_danhmuc');
-Route::get('category/{id}', [CategoryController::class, 'fill_category'])->name('fill_category');
+Route::prefix('/')->name('')->group(function () {
+    Route::get('/', function () {
+        return view('layout.master');
+    });
+    Route::get('/product-detail/{id}', [ClientController::class, 'productDetail'])->name('productDetail');
+    Route::get('/product', [ClientController::class, 'product'])->name('product');
+    Route::get('/categoryProducts/{id}', [ClientController::class, 'categoryProducts'])->name('categoryProducts');
+    Route::get('/searchProduct', [ClientController::class, 'searchProduct'])->name('searchProduct');
+    Route::prefix('cart')->name('cart.')->group(function () {
+        Route::get('/', [CartController::class, 'listCart'])->name('listCart');
+        Route::get('/addCart/{id}', [CartController::class, 'addCart'])->name('addCart');
+        Route::get('/delete/{id}', [CartController::class, 'delete'])->name('delete');
+        // Route::get('/order/{tt}', [OrderController::class, 'getOrder'])->name('order');
+        // Route::get('/add-order/{tt}', [OrderController::class, 'addOrder'])->name('addOrder');
+    });
+});
 
 
 
-Route::prefix('/dashboard')->group(function(){
+Route::middleware('admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-   
+
     // user
-    Route::prefix('/user')->name('user.')->group(function(){
+    Route::prefix('/user')->name('user.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('list');
         Route::delete('/delete/{user}', [UserController::class, 'delete'])->name('delete'); //name: users.delete
         Route::get('/status/{user}', [UserController::class, 'status'])->name('status');
@@ -63,10 +75,9 @@ Route::prefix('/dashboard')->group(function(){
 
     //product
 
-    Route::prefix('/product')->name('product.')->group(function(){
+    Route::prefix('/product')->name('product.')->group(function () {
         Route::get('/', [ProductController::class, 'list'])->name('list');
         Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
-        // Route::post('/product/deleteall', [ProductController::class, 'deleteall'])->name('product_deleteall');
         Route::get('/create', [ProductController::class, 'create'])->name('create');
         Route::post('/store', [ProductController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
@@ -75,54 +86,23 @@ Route::prefix('/dashboard')->group(function(){
 
 
     //category
-    Route::prefix('/category')->name('category.')->group(function(){
+    Route::prefix('/category')->name('category.')->group(function () {
         Route::get('/', [CategoryController::class, 'list'])->name('list');
         Route::get('/create', [CategoryController::class, 'create'])->name('create');
         Route::post('/store', [CategoryController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
         Route::put('/update/{category}', [CategoryController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
-    
     });
-   
-
-
-    // //admin
-    // Route::get('/admin/list', [UserController::class, 'adminindex'])->name('admin_list');
-    // Route::get('/admin/create', [UserController::class, 'admincreate'])->name('admin_create');
-    // Route::post('/admin/store', [UserController::class, 'adminstore'])->name('admin_store');
-    // Route::get('/admin/edit/{id}', [UserController::class, 'adminedit'])->name('admin_edit');
-    // Route::get('/admin/delete/{id}', [UserController::class, 'admindelete'])->name('admin_delete');
-    // Route::post('/admin/admin_update/{id}', [UserController::class, 'adminupdate'])->name('admin_update');
-    
-
-   
-
-    // search
-    // Route::get('/product/search', [ProductController::class, 'search'])->name('search');
-
-    
-
-    // đơn hàng
-    // Route::get('/don-hang/list', [DonhangController::class, 'list'])->name('donhang_list');
-    // Route::get('/don-hang/detai/{id}', [DonhangController::class, 'detaiorder'])->name('detai_order_user');
-    // Route::get('/don-hang/status/{donhang}', [DonhangController::class, 'statusorder'])->name('status_order');
-
-    // thống kê
-    // Route::get('thongke/order', [HomeController::class, 'allorder'])->name('orderall');
-    // Route::get('thongke/order/complete', [HomeController::class, 'complete'])->name('complete');
 });
 
 
 // login
 Route::middleware('guest')->prefix('/auth')->name('auth.')->group(function () {
-    // Route::get('/', [AuthController::class, 'index'])->name('login');
     Route::get('/login', [AuthController::class, 'getLogin'])->name('getLogin');
     Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
-
-    // use Laravel\Socialite\Facades\Socialite;
-    // Route::get('/login-google', [AuthController::class, 'getLoginGoogle'])->name('getLoginGoogle');
-    // Route::get('/google/callback', [AuthController::class, 'loginGoogleCallback'])->name('loginGoogleCallback');
+    Route::get('/register', [AuthController::class, 'getRegister'])->name('getRegister');
+    Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
 });
 
 Route::get('/auth/logout', [AuthController::class, 'logout'])->middleware('auth');

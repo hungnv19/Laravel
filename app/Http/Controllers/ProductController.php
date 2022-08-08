@@ -12,8 +12,7 @@ class ProductController extends Controller
     public function list()
     {
         $product = Product::select('id', 'name', 'price', 'promotion', 'quantity', 'avatar', 'category_id', 'size')
-        ->with('category')
-        ->paginate(6);
+        ->orderBy('id')->with('category')->paginate(5);
         // dd($product);
         return view('admin.product.list', [
         'product' => $product
@@ -77,7 +76,7 @@ class ProductController extends Controller
         // 4. Lưu
         $product->save();
 
-        return redirect()->route('product.list');
+        return redirect()->route('admin.product.list');
         // Lab: Thực hiện chức năng chỉnh sửa, method PUT, có dữ liệu của user hiện tại và lưu
 
     }
@@ -102,7 +101,7 @@ class ProductController extends Controller
             $product->avatar_product = $avatar->storeAs('images/product', $avatarName);
         }
         $product->save();
-        return redirect()->route('product.list');
+        return redirect()->route('admin.product.list');
     }
 
 }

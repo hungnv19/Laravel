@@ -24,7 +24,7 @@ class UserController extends Controller
         if ($user->status == 1) {
             $user->status = 0;
         } else {
-            $user->status = 1;
+            $user->status =  1;
         }
         $user->save();
         return back();

@@ -26,13 +26,17 @@ class LoginRequest extends FormRequest
         // key là name của các input, value là các đk
         return [
             'email' => 'required|email|min:6|max:32',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            // 'name' => 'required|min:6|max|16'
         ];
     }
     public function messages()
     {
         // key là key của rule . đk
         return [
+            // 'name.required' => 'Name bắt buộc nhập',
+            // 'name.min' => 'Name tối thiểu 6 ký tự',
+            // 'name.max' => 'Name tối đa 32 ký tự',
             'email.required' => 'Email bắt buộc nhập',
             'email.email' => 'Email phải đúng định dạng',
             'email.min' => 'Email tối thiểu 6 ký tự',

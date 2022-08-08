@@ -6,7 +6,7 @@
 
 @section('content')
     <form 
-    action="{{ isset($product) ? route('product.update', $product->id) : route('product.store') }}
+    action="{{ isset($product) ? route('admin.product.update', $product->id) : route('admin.product.store') }}
     " method="POST"
         enctype="multipart/form-data">
         @csrf

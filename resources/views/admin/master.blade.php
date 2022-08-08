@@ -33,6 +33,9 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="" class="nav-link">Contact</a>
                 </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{asset('/auth/logout')}}" class="nav-link">Logout</a>
+                </li>
             </ul>
 
             <!-- Right navbar links -->
@@ -183,10 +186,10 @@
                     <div class="info">
                         <a href="#" class="d-block">
                             <!-- Auth::check() trả về true/false đã đăng nhập hay chưa -->
-                            {{-- @if (Auth::check())
-              <!-- Auth::user() trả về thể hiện của model User chứa thông tin đã đăng nhập -->
-              {{Auth::user()->email}}
-            @endif --}}
+                            @if (Auth::check())
+                                <!-- Auth::user() trả về thể hiện của model User chứa thông tin đã đăng nhập -->
+                                {{ Auth::user()->email }}
+                            @endif
                         </a>
                     </div>
                 </div>
@@ -220,7 +223,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ asset('/dashboard/product') }}" class="nav-link">
+                                    <a href="{{ asset('/admin/product') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách sản phẩm</p>
                                     </a>
@@ -238,7 +241,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ asset('/dashboard/user') }}" class="nav-link">
+                                    <a href="{{ asset('/admin/user') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách người dùng</p>
                                     </a>
@@ -256,7 +259,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ asset('/dashboard/category') }}" class="nav-link">
+                                    <a href="{{ asset('/admin/category') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách danh mục</p>
                                     </a>
@@ -298,7 +301,7 @@
                             <h1> @yield('content-title') </h1>
                         </div>
                         <div class="col-sm-6">
-                           
+
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->

@@ -5,7 +5,7 @@
 @section('content-title', 'Quản lý sản phẩm')
 
 @section('content')
-    <form action="{{ isset($category) ? route('category.update', $category->id) : route('category.store') }}
+    <form action="{{ isset($category) ? route('admin.category.update', $category->id) : route('admin.category.store') }}
     "
         method="POST">
         @csrf

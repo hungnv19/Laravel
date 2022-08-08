@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function list()
     {
-        $category = Category::all();
+        $category = Category::select('id', 'name')->orderBy('id', 'desc')->get();
         return view('admin.category.list', [
             'category' => $category
         ]);
@@ -26,7 +26,7 @@ class CategoryController extends Controller
         $category->fill([
             'name' => $request->name
         ])->save();
-        return redirect()->route('category.list');
+        return redirect()->route('admin.category.list');
     }
     public function edit(Request $request)
     {
@@ -39,12 +39,12 @@ class CategoryController extends Controller
     {
         $category->find($request->id)->update($request->all());
         $category->save();
-        return redirect()->route('category.list');
+        return redirect()->route('admin.category.list');
     }
     public function delete(Request $request)
     {
         Category::destroy($request->id);
-        return redirect()->route('category.list');
+        return redirect()->route('admin.category.list');
     }
     public function fill_category(Request $request)
     {

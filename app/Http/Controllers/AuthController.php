@@ -23,7 +23,7 @@ class AuthController extends Controller
         // dd($data);
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
          
-            return redirect()->route('users.list');
+            return redirect()->route('admin.user.list');
         }
        
         return redirect()->route('auth.getLogin');
@@ -35,6 +35,23 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        return redirect()->route('auth.getLogin');
+    }
+    public function getRegister()
+    {
+        return view('admin.auth.register');
+    }
+
+    public function postRegister(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role = 0;
+        $user->status = 1;
+        // dd($user);
+        $user->save();
         return redirect()->route('auth.getLogin');
     }
 }

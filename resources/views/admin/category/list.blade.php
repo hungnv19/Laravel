@@ -6,7 +6,7 @@
 
 @section('content')
     <div class='my-3'>
-        <a href="{{route('category.create') }}">
+        <a href="{{route('admin.category.create') }}">
             <button class='btn btn-success'>Tạo mới</button>
         </a>
     </div>
@@ -23,10 +23,10 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
-                    <td><a href="{{route('category.edit', $item->id) }}"><i class="far fa-edit"></i>Sửa</a> |
+                    <td><a href="{{route('admin.category.edit', $item->id) }}"><i class="far fa-edit"></i>Sửa</a> |
 
 
-                        <a href="{{route('category.delete', $item->id) }}" onclick="return confirm('Bạn muốn xóa nó không')">
+                        <a href="{{route('admin.category.delete', $item->id) }}" onclick="return confirm('Bạn muốn xóa nó không')">
                             <i class="fas fa-trash"></i>Xóa</a>
                     </td>
                 </tr>

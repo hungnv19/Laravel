@@ -11,7 +11,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -25,8 +25,8 @@
 </head>
 
 <body>
-    
-   
+
+
     <!-- Offcanvas Menu End -->
 
     <!-- Header Section Begin -->
@@ -44,7 +44,8 @@
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
-                                <a href="{{asset('/login')}}">Sign in</a>
+                                <a href="{{ asset('/auth/login') }}">Sign in</a>
+
                                 <a href="">FAQs</a>
                             </div>
                             <div class="header__top__hover">
@@ -52,7 +53,7 @@
                                 <ul>
                                     <li>USD</li>
                                     <li>VNĐ</li>
-                                   
+
                                 </ul>
                             </div>
                         </div>
@@ -64,25 +65,30 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="{{asset('/')}}"><img src="img/noi-that/logo.png" width="160px" alt=""></a>
+                        <a href="{{ asset('/') }}"><img src="img/noi-that/logo.png" width="160px"
+                                alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="{{asset('/')}}">Home</a></li>
-                            <li><a href="{{asset('/shop')}}">Shop</a></li>
-                            <li><a href="{{asset('/about')}}">Giới Thiệu</a> </li>
-                            <li><a href="{{asset('/blog')}}">Tin Tức</a></li>
-                            <li><a href="{{asset('/contact')}}">Liên Hệ</a></li>
+                            <li class="active"><a href="{{ asset('/') }}">Home</a></li>
+                            <li><a href="{{ asset('/product') }}">Shop</a></li>
+                            <li><a href="{{ asset('/about') }}">Giới Thiệu</a> </li>
+                            <li><a href="{{ asset('/blog') }}">Tin Tức</a></li>
+                            <li><a href="{{ asset('/contact') }}">Liên Hệ</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
                         <a href="" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                        <a href=""><img src="img/icon/heart.png" alt=""></a>
-                        <a href="{{asset('/cart')}}"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+                        @if (Auth::check())
+                            <!-- Auth::user() trả về thể hiện của model User chứa thông tin đã đăng nhập -->
+                            {{ Auth::user()->name }}
+                        @endif
+                        <a href="{{asset('auth/logout')}}"><img src="img/icon/heart.png" alt=""></a>
+                        <a href="{{ asset('/cart') }}"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
                         <div class="price">$0.00</div>
                     </div>
                 </div>
@@ -103,7 +109,7 @@
                                 <h6>Summer Collection</h6>
                                 <h2>Fall - Winter Collections 2030</h2>
                                 <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                                commitment to exceptional quality.</p>
+                                    commitment to exceptional quality.</p>
                                 <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
                                 <div class="hero__social">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
@@ -124,7 +130,7 @@
                                 <h6>Summer Collection</h6>
                                 <h2>Fall - Winter Collections 2030</h2>
                                 <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                                commitment to exceptional quality.</p>
+                                    commitment to exceptional quality.</p>
                                 <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
                                 <div class="hero__social">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
@@ -145,7 +151,7 @@
                                 <h6>Summer Collection</h6>
                                 <h2>Fall - Winter Collections 2030</h2>
                                 <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                                commitment to exceptional quality.</p>
+                                    commitment to exceptional quality.</p>
                                 <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
                                 <div class="hero__social">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
@@ -169,7 +175,8 @@
                 <div class="col-lg-7 offset-lg-4">
                     <div class="banner__item">
                         <div class="banner__item__pic">
-                            <img src="img/noi-that/banner-4.jpg" style=" width: 500px; height: 500px " alt="">
+                            <img src="img/noi-that/banner-4.jpg" style=" width: 500px; height: 500px "
+                                alt="">
                         </div>
                         <div class="banner__item__text">
                             <h2>Không gian phòng ngủ</h2>
@@ -181,7 +188,8 @@
                 <div class="col-lg-5">
                     <div class="banner__item banner__item--middle">
                         <div class="banner__item__pic">
-                            <img src="img/noi-that/banner-5.jpg"   style=" width: 500px; height: 500px " alt="">
+                            <img src="img/noi-that/banner-5.jpg" style=" width: 500px; height: 500px "
+                                alt="">
                         </div>
                         <div class="banner__item__text">
                             <h2>Đồ trang trí</h2>
@@ -193,7 +201,7 @@
                 <div class="col-lg-7">
                     <div class="banner__item banner__item--last">
                         <div class="banner__item__pic">
-                            <img src="img/noi-that/banner-6.jpg"   style=" width: 500px; height: 500px "alt="">
+                            <img src="img/noi-that/banner-6.jpg" style=" width: 500px; height: 500px "alt="">
                         </div>
                         <div class="banner__item__text">
                             <h2>Không gian phòng khách</h2>
@@ -222,17 +230,19 @@
             <div class="row product__filter">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
                     <div class="product__item">
-               
-                        <div   class="product__item__pic set-bg"  data-setbg="img/noi-that/sp-1.jpg">
-                          
+
+                        <div class="product__item__pic set-bg" data-setbg="img/noi-that/sp-1.jpg">
+
                             <span class="label">New</span>
                             <ul class="product__hover">
                                 <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="{{asset('/shop-detail')}}"><img src="img/icon/search.png" alt=""></a></li>
+                                <li><a href="#"><img src="img/icon/compare.png" alt="">
+                                        <span>Compare</span></a></li>
+                                <li><a href="{{ asset('/shop-detail') }}"><img src="img/icon/search.png"
+                                            alt=""></a></li>
                             </ul>
                         </div>
-                  
+
                         <div class="product__item__text">
                             <h6>Piqué Biker Jacket</h6>
                             <a href="#" class="add-cart">+ Add To Cart</a>
@@ -263,7 +273,8 @@
                         <div class="product__item__pic set-bg" data-setbg="img/noi-that/sp-2.jpg">
                             <ul class="product__hover">
                                 <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="img/icon/compare.png" alt="">
+                                        <span>Compare</span></a></li>
                                 <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
                             </ul>
                         </div>
@@ -298,7 +309,8 @@
                             <span class="label">Sale</span>
                             <ul class="product__hover">
                                 <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="img/icon/compare.png" alt="">
+                                        <span>Compare</span></a></li>
                                 <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
                             </ul>
                         </div>
@@ -332,7 +344,8 @@
                         <div class="product__item__pic set-bg" data-setbg="img/noi-that/sp-4.jpg">
                             <ul class="product__hover">
                                 <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="img/icon/compare.png" alt="">
+                                        <span>Compare</span></a></li>
                                 <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
                             </ul>
                         </div>
@@ -366,7 +379,8 @@
                         <div class="product__item__pic set-bg" data-setbg="img/noi-that/sp-9.jpg">
                             <ul class="product__hover">
                                 <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="img/icon/compare.png" alt="">
+                                        <span>Compare</span></a></li>
                                 <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
                             </ul>
                         </div>
@@ -401,7 +415,8 @@
                             <span class="label">Sale</span>
                             <ul class="product__hover">
                                 <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="img/icon/compare.png" alt="">
+                                        <span>Compare</span></a></li>
                                 <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
                             </ul>
                         </div>
@@ -435,7 +450,8 @@
                         <div class="product__item__pic set-bg" data-setbg="img/noi-that/sp-7.jpg">
                             <ul class="product__hover">
                                 <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="img/icon/compare.png" alt="">
+                                        <span>Compare</span></a></li>
                                 <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
                             </ul>
                         </div>
@@ -469,7 +485,8 @@
                         <div class="product__item__pic set-bg" data-setbg="img/noi-that/sp-8.jpg">
                             <ul class="product__hover">
                                 <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="img/icon/compare.png" alt="">
+                                        <span>Compare</span></a></li>
                                 <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
                             </ul>
                         </div>
@@ -569,7 +586,7 @@
                     <div class="instagram__text">
                         <h2>Instagram</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
+                            labore et dolore magna aliqua.</p>
                         <h3>#Noithat_hanquoc</h3>
                     </div>
                 </div>
@@ -632,7 +649,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="#"><img src="img/noi-that/logo.png"  width="100px" alt=""></a>
+                            <a href="#"><img src="img/noi-that/logo.png" width="100px" alt=""></a>
                         </div>
                         <p>Nội thất Hàn Quốc Online Số 1 Tại Việt Nam.</p>
                         <p>Địa chỉ: Số 15 - Ngõ 80 Xuân Phương - Nam Từ Liêm - Hà Nội</p>
@@ -642,13 +659,13 @@
                 </div>
                 <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                    
+
                         <h6>Thông tin</h6>
                         <ul>
                             <li><a href="#">Về chúng tôi</a></li>
                             <li><a href="#">Thông tin liên hệ</a></li>
                             <li><a href="#">Hướng dẫn mua hàng</a></li>
-                        
+
                             <li><a href="#">Sản phẩm khuyến mãi</a></li>
                         </ul>
                     </div>
@@ -668,7 +685,8 @@
                     <div class="footer__widget">
                         <h6>NewLetter</h6>
                         <div class="footer__newslatter">
-                            <p>Hãy để lại email của bạn để nhận được những ý tưởng trang trí mới và những thông tin, ưu đãi</p>
+                            <p>Hãy để lại email của bạn để nhận được những ý tưởng trang trí mới và những thông tin, ưu
+                                đãi</p>
                             <p>Email: hungnvph14820@fpt.edu.vn</p>
                             <form action="#">
                                 <input type="text" placeholder="Your email">
@@ -687,7 +705,8 @@
                                 document.write(new Date().getFullYear());
                             </script>2020
                             All rights reserved | This template is made with <i class="fa fa-heart-o"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">HUNG NGUYEN</a>
+                                aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">HUNG
+                                NGUYEN</a>
                         </p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>

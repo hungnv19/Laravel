@@ -71,7 +71,7 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li class="active"><a href="{{asset('/')}}">Home</a></li>
-                            <li><a href="{{asset('/shop')}}">Shop</a></li>
+                            <li><a href="{{asset('/product')}}">Shop</a></li>
                             <li><a href="{{asset('/about')}}">Giới Thiệu</a> </li>
                             <li><a href="{{asset('/blog')}}">Tin Tức</a></li>
                             <li><a href="{{asset('/contact')}}">Liên Hệ</a></li>
