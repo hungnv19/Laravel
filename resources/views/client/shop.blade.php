@@ -23,10 +23,10 @@
                 <div class="col-lg-3">
                     <div class="shop__sidebar">
                         <div class="shop__sidebar__search">
-                            <form action="#">
+                            <form action="{{route('searchProduct')}}">
                                 @csrf
-                                <input type="text" width="400px" name="name"
-                                    placeholder="Tìm kiếm" class="form-control">
+                                <input type="text" width="400px" name="name" placeholder="Tìm kiếm"
+                                    class="form-control">
                                 <button type="submit"><span class="icon_search"></span></button>
                             </form>
                         </div>
@@ -54,7 +54,7 @@
                                     <div class="card-heading">
                                         <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
                                     </div>
-                                    <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
+                                    {{-- <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="shop__sidebar__price">
                                                 <ul>
@@ -67,7 +67,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="card">
@@ -132,7 +132,7 @@
                                                 <i class="ti-heart"></i>
                                             </a>
                                             <a href=" {{ route('cart.addCart', $item->id) }}">
-                                               
+
 
                                                 <i class="ti-shopping-cart"></i>
                                             </a>
@@ -187,7 +187,7 @@
                                 </div>
                             </div>
                         </div> --}}
-                      
+
                     </div>
                     <div>
                         {{ $product->links() }}

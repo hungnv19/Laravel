@@ -11,7 +11,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -25,7 +25,7 @@
 </head>
 
 <body>
-   
+
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
@@ -41,7 +41,8 @@
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
-                                <a href="{{asset('/login')}}">Sign in</a>
+                                <a href="{{ asset('/auth/login') }}">Sign in</a>
+
                                 <a href="">FAQs</a>
                             </div>
                             <div class="header__top__hover">
@@ -49,7 +50,7 @@
                                 <ul>
                                     <li>USD</li>
                                     <li>VNĐ</li>
-                                   
+
                                 </ul>
                             </div>
                         </div>
@@ -61,25 +62,30 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="{{asset('/')}}"><img src="img/noi-that/logo.png" width="160px" alt=""></a>
+                        <a href="{{ asset('/') }}"><img src="img/noi-that/logo.png" width="160px"
+                                alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="{{asset('/')}}">Home</a></li>
-                            <li><a href="{{asset('/product')}}">Shop</a></li>
-                            <li><a href="{{asset('/about')}}">Giới Thiệu</a> </li>
-                            <li><a href="{{asset('/blog')}}">Tin Tức</a></li>
-                            <li><a href="{{asset('/contact')}}">Liên Hệ</a></li>
+                            <li class="active"><a href="{{ asset('/') }}">Home</a></li>
+                            <li><a href="{{ asset('/product') }}">Shop</a></li>
+                            <li><a href="{{ asset('/about') }}">Giới Thiệu</a> </li>
+                            <li><a href="{{ asset('/blog') }}">Tin Tức</a></li>
+                            <li><a href="{{ asset('/contact') }}">Liên Hệ</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
                         <a href="" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                        <a href=""><img src="img/icon/heart.png" alt=""></a>
-                        <a href="{{asset('/cart')}}"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+                        @if (Auth::check())
+                            <!-- Auth::user() trả về thể hiện của model User chứa thông tin đã đăng nhập -->
+                            {{ Auth::user()->name }}
+                        @endif
+                        <a href="{{asset('auth/logout')}}"><img src="img/icon/heart.png" alt=""></a>
+                        <a href="{{ asset('/cart') }}"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
                         <div class="price">$0.00</div>
                     </div>
                 </div>
@@ -114,108 +120,65 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="shopping__cart__table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/noi-that/sp-1.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>T-shirt Contrast Pocket</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 30.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/noi-that/sp-2.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Diagonal Textured Cap</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 32.50</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/noi-that/sp-3.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Basic Flowing Scarf</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 47.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/noi-that/sp-4.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Basic Flowing Scarf</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 30.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        @if (Auth::user())
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($cart as $item)
+                                        <tr>
+                                            <td class="product__cart__item">
+                                                <div class="product__cart__item__pic">
+                                                    <img src="{{ asset($item->product->avatar) }}" alt="">
+                                                </div>
+                                                <div class="product__cart__item__text">
+                                                    <h6>{{ $item->product->name }}</h6>
+                                                    <h5>{{ $item->product->price }}</h5>
+                                                </div>
+                                            </td>
+                                            <td class="quantity__item">
+                                                <div class="quantity">
+                                                    <div class="pro-qty-2">
+                                                        <input type="text" value="{{$item->quantity}}">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="cart__price">{{ $item->tong_tien }}</td>
+                                            {{-- <td>
+                                                <a href="  {{ route('cart.delete', [$item->id]) }}">Xóa</a>
+                                            </td> --}}
+                                            <td class="cart__close">
+                                                <button class="btn btn-primary" >
+                                                    <a href="  {{ route('cart.delete', [$item->id]) }}">Xóa</a>
+                                                </button>
+                                               
+                                            </td>
+                                            <input type="hidden" value="{{ $tong_tien += $item->tong_tien }}">
+                                        </tr>
+                                    @endforeach
+
+
+
+                                </tbody>
+                            </table>
+                        @endif
+
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn">
-                                <a href="#">Tiếp tục mua sắm</a>
+                                <a href="{{ asset('/product') }}">Tiếp tục mua sắm</a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn update__btn">
-                                <a href="#"><i class="fa fa-spinner"></i> Cập nhật giỏ hàng</a>
+                                <a href=""><i class="fa fa-spinner"></i> Cập nhật giỏ hàng</a>
                             </div>
                         </div>
                     </div>
@@ -231,8 +194,8 @@
                     <div class="cart__total">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span>$ 169.50</span></li>
-                            <li>Total <span>$ 169.50</span></li>
+                            {{-- <li>Subtotal <span>$ 169.50</span></li> --}}
+                            <li>Total <span>{{ $tong_tien }}</span></li>
                         </ul>
                         <a href="#" class="primary-btn">Tiến hành kiểm tra</a>
                     </div>
@@ -240,7 +203,8 @@
             </div>
         </div>
     </section>
-    <!-- Shopping Cart Section End -->
+
+
 
     <!-- Footer Section Begin -->
     <footer class="footer">
@@ -249,7 +213,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="#"><img src="img/noi-that/logo.png"  width="100px" alt=""></a>
+                            <a href="#"><img src="img/noi-that/logo.png" width="100px" alt=""></a>
                         </div>
                         <p>Nội thất Hàn Quốc Online Số 1 Tại Việt Nam.</p>
                         <p>Địa chỉ: Số 15 - Ngõ 80 Xuân Phương - Nam Từ Liêm - Hà Nội</p>
@@ -259,13 +223,13 @@
                 </div>
                 <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                    
+
                         <h6>Thông tin</h6>
                         <ul>
                             <li><a href="#">Về chúng tôi</a></li>
                             <li><a href="#">Thông tin liên hệ</a></li>
                             <li><a href="#">Hướng dẫn mua hàng</a></li>
-                        
+
                             <li><a href="#">Sản phẩm khuyến mãi</a></li>
                         </ul>
                     </div>
@@ -285,7 +249,8 @@
                     <div class="footer__widget">
                         <h6>NewLetter</h6>
                         <div class="footer__newslatter">
-                            <p>Hãy để lại email của bạn để nhận được những ý tưởng trang trí mới và những thông tin, ưu đãi</p>
+                            <p>Hãy để lại email của bạn để nhận được những ý tưởng trang trí mới và những thông tin, ưu
+                                đãi</p>
                             <p>Email: hungnvph14820@fpt.edu.vn</p>
                             <form action="#">
                                 <input type="text" placeholder="Your email">
@@ -304,7 +269,8 @@
                                 document.write(new Date().getFullYear());
                             </script>2020
                             All rights reserved | This template is made with <i class="fa fa-heart-o"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">HUNG NGUYEN</a>
+                                aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">HUNG
+                                NGUYEN</a>
                         </p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>

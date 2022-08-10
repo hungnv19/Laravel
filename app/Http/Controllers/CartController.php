@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -10,90 +9,43 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-
-    public function listCart()
-    {
-        $total = 0;
-        $totalall = 0;
-        if (Auth::user()) {
-            $count_giohang = Cart::where('user_id', Auth::user()->id)->get();
+    public function listCart(){
+        if( Auth::user()) {
+            $cart = Cart::select('*')->with('product')->where('user_id', '=', Auth::user()->id)->get();
+            $tong_tien = 0;
+            
+            return view('client.shopping-cart', ['cart' => $cart, 'tong_tien' => $tong_tien]);
+        }else{
+            return view('client.shopping-cart');
         }
-        $giohang = Cart::where('user_id', Auth::user()->id)->get();
-        // dd($giohang);
-        return view('client.shopping-cart', [
-            'giohang' => $giohang,
-            'count_giohang' => $count_giohang,
-            'total' => $total,
-            'totalall' => $totalall
-        ]);
     }
-    public function addCart(Product $product, Request $request, Cart $cart)
-    {
-
-        $user = Auth::user();
-        if ($request->quantity > $product->quantity) {
-            return redirect()->back();
+    public function addCart($id){
+        $cart = Cart::where('product_id',$id)->where('user_id', Auth::user()->id)->first();
+        $product = Product::select('id', 'name', 'price', 'quantity', 'avatar', 'describe', 'promotion', 'category_id', 'size')->where('id', $id)->first();
+       
+       
+        if ($cart && $cart->product_id==$id) {
+            // dd(1);
+            $cart->quantity = $cart->quantity+1;
+            $cart->tong_tien = $cart->quantity*$product['price'];
+            $cart->save();
+            return redirect()->route('cart.listCart');
         }
-        if ($product->promotion != null) {
-            foreach ($cart->all() as $value) {
-                if ($user->id == $value->user_id && $product->id == $value->product_id) {
-                    $value->fill([
-                        'user_id' => $user->id,
-                        'product_id' => $product->id,
-                        'avatar' => $product->avatar,
-                        'quantity' => $value->quantity + $request->quantity,
-                        'price' => $product->price,
-                        'name' => $product->name,
-                    ]);
-                    $value->save();
-                    return back();
-                }
-            }
-         
-            $oneCart = new Cart();
-            $oneCart->fill([
-                'user_id' => $user->id,
-                'product_id' => $product->id,
-                'avatar' => $product->avatar,
-                'quantity' => $request->quantity,
-                'price' => $product->price,
-                'name' => $product->name,
-            ]);
-            $oneCart->save();
-            return back();
-        } else {
-            foreach ($cart->all() as $value) {
-                if ($user->id == $value->user_id && $product->id == $value->product_id) {
-                    $value->fill([
-                        'user_id' => $user->id,
-                        'product_id' => $product->id,
-                        'avatar' => $product->avatar,
-                        'quantity' => $value->quantity + $request->quantity,
-                        'price' => $product->price,
-                        'name' => $product->name,
-                    ]);
-                    $value->save();
-                    return back();
-                }
-            }
-            $request->quantity = $request->quantity;
-            $oneCart = new Cart();
-            $oneCart->fill([
-                'user_id' => $user->id,
-                'product_id' => $product->id,
-                'avatar' => $product->avatar,
-                'quantity' => $request->quantity,
-                'price' => $product->price,
-                'name' => $product->name,
-            ]);
-            $oneCart->save();
+       
+        $data['product_id'] = $id;
+        $data['quantity'] = 1;
+        $data['price'] = $product['price'];
+        $data['user_id'] = Auth::user()->id;
+        $data['tong_tien'] = 1 * $product['price'];
+       
+        Cart::create($data);
+       
+        return redirect()->route('cart.listCart');
+    }
+    public function delete(Cart $id)
+    {
+        if ($id->delete()) {
             return redirect()->back();
         }
     }
-    public function delete(Request $request)
-    {
-        Cart::destroy($request->id);
-        return back();
-    }
-   
 }

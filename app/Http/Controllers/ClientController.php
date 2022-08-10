@@ -13,10 +13,10 @@ class ClientController extends Controller
     public function index()
     {
         $products = Product::select('id', 'name', 'price', 'quantity', 'avatar', 'describe', 'promotion', 'category_id', 'size')
-            ->with('category')->paginate(3);
+            ->with('category')->limit(3);
 
         $products_2 = Product::select('id', 'name', 'price', 'quantity', 'avatar', 'describe', 'promotion', 'category_id', 'size')
-            ->orderBy('id')->with('category')->paginate(4);
+            ->orderBy('id')->with('category')->limit(4);
 
         $sofa = DB::table('product')->join('category', 'product.category_id', '=', 'category.id')->select('product.*')
             ->where('category.name', '=', 'sofa')->limit(1)
@@ -62,7 +62,7 @@ class ClientController extends Controller
         $product = Product::where('name', 'like', '%' . $requests->name . '%')->paginate(12);
         $category = Category::select('id', 'name')->get();
       
-        return view('clients.product', [
+        return view('client.shop', [
             'product' => $product,
             'category' => $category,
           
