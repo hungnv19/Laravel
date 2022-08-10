@@ -22,18 +22,7 @@ use App\Models\Category;
 |
 */
 
-// Route::get('/', function () {
-//     return view('layout.master');
-// });
-// Route::get('/shop', function () {
-//     return view('client.shop');
-// });
-// Route::get('/shop-detail', function () {
-//     return view('client.shop-detail');
-// });
-// Route::get('/cart', function () {
-//     return view('client.shopping-cart');
-// });
+
 Route::get('/about', function () {
     return view('client.about');
 });
@@ -56,8 +45,7 @@ Route::prefix('/')->name('')->group(function () {
         Route::get('/', [CartController::class, 'listCart'])->name('listCart');
         Route::get('/addCart/{id}', [CartController::class, 'addCart'])->name('addCart');
         Route::get('/delete/{id}', [CartController::class, 'delete'])->name('delete');
-        // Route::get('/order/{tt}', [OrderController::class, 'getOrder'])->name('order');
-        // Route::get('/add-order/{tt}', [OrderController::class, 'addOrder'])->name('addOrder');
+        
     });
 });
 

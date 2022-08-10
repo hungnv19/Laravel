@@ -197,7 +197,7 @@
                             {{-- <li>Subtotal <span>$ 169.50</span></li> --}}
                             <li>Total <span>{{ $tong_tien }}</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">Tiến hành kiểm tra</a>
+                        <a href="#" class="primary-btn">Đặt hàng</a>
                     </div>
                 </div>
             </div>

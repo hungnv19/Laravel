@@ -10,24 +10,79 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__details__breadcrumb">
-                            <a href="{{asset('/')}}">Home</a>
-                            <a href="{{route('productDetail', $product->id)}}">Product Details</a>
+                            <a href="{{ asset('/') }}">Home</a>
+                            <a href="{{ route('productDetail', $product->id) }}">Product Details</a>
                             <span>Product Details</span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                   
+                    <div class="col-lg-3 col-md-3">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
+                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset($product->avatar) }}">
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">
+                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset($product->avatar) }}">
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">
+                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset($product->avatar) }}">
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">
+                                    <div class="product__thumb__pic set-bg" data-setbg="{{ asset($product->avatar) }}">
+                                        <i class="fa fa-play"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="col-lg-6 col-md-9">
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__pic__item">
-                                    <img src="{{asset($product->avatar)}}" alt="">
+                                    <img src="{{ asset($product->avatar) }}" alt="">
                                 </div>
                             </div>
-                          
+                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                <div class="product__details__pic__item">
+                                    <img src="{{ asset($product->avatar) }}" alt="">
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <div class="product__details__pic__item">
+                                    <img src="{{ asset($product->avatar) }}" alt="">
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-4" role="tabpanel">
+                                <div class="product__details__pic__item">
+                                    <img src="{{ asset($product->avatar) }}" alt="">
+                                    <a href="https://www.youtube.com/watch?v=8PJ3_p7VqHw&list=RD8PJ3_p7VqHw&start_radio=1"
+                                        class="video-popup"><i class="fa fa-play"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    {{-- <div class="col-lg-6 col-md-9">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__pic__item">
+                                    <img src="{{ asset($product->avatar) }}" alt="">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -37,8 +92,8 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="product__details__text">
-                            <h3>{{$product->name}}</h3>
-                            <h2>{{$product->price}}</h2>
+                            <h3>{{ $product->name }}</h3>
+                            <h2>{{ $product->price }}</h2>
                             <div class="product__details__option">
                                 <div class="product__details__option__size">
                                     <span>Size:</span>
@@ -51,7 +106,7 @@
                                     <label for="l">Lớn
                                         <input type="radio" id="l">
                                     </label>
-                                  
+
                                 </div>
                                 {{-- <div class="product__details__option__color">
                                     <span>Color:</span>
@@ -78,7 +133,7 @@
                                         <input type="text" value="1">
                                     </div>
                                 </div>
-                                <a href="{{route('cart.addCart', $product->id)}}" class="primary-btn">add to cart</a>
+                                <a href="{{ route('cart.addCart', $product->id) }}" class="primary-btn">add to cart</a>
                             </div>
                             <div class="product__details__btns__option">
                                 <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
@@ -90,20 +145,21 @@
                                 <ul>
                                     <li>
                                         <a class="" href="#">
-                                          <span>Loại</span>: {{ isset($product->category) ? $product->category->name : '' }}</a>
-                                      </li>
-                                      <li>
-                                        @if($product->status == 1)
-                                          <a href="#"> <span>Trạng thái</span>: Còn hàng </a>
+                                            <span>Loại</span>:
+                                            {{ isset($product->category) ? $product->category->name : '' }}</a>
+                                    </li>
+                                    <li>
+                                        @if ($product->status == 1)
+                                            <a href="#"> <span>Trạng thái</span>: Còn hàng </a>
                                         @else
-                                          <a href="#"> <span>Trạng thái</span>: Hết hàng </a>
+                                            <a href="#"> <span>Trạng thái</span>: Hết hàng </a>
                                         @endif
-                                      </li>
+                                    </li>
                                 </ul>
                                 <p>
                                     Mô tả:
-                                    {{$product->describe}}
-                                  </p>
+                                    {{ $product->describe }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -115,18 +171,18 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-toggle="tab" href="#tabs-5"
-                                    role="tab">Description</a>
+                                        role="tab">Description</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">Customer
-                                    Previews(5)</a>
+                                        Previews(5)</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabs-7" role="tab">Additional
-                                    information</a>
+                                        information</a>
                                 </li>
                             </ul>
-                            {{-- <div class="tab-content">
+                            <div class="tab-content">
                                 <div class="tab-pane active" id="tabs-5" role="tabpanel">
                                     <div class="product__details__tab__content">
                                         <p class="note">Nam tempus turpis at metus scelerisque placerat nulla deumantos
@@ -225,7 +281,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
