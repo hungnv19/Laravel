@@ -1,5 +1,5 @@
 @extends('admin.auth.main')
-@section('title', 'Đăng nhập')
+@section('title', 'Đăng ky')
 @section('content')
     <div class="register-box">
         <div class="card">
@@ -12,35 +12,35 @@
                         <input type="text" class="form-control" placeholder="Username" name="name">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-user"></span>
+                                @if ($errors->has('name'))
+                                    <span class="fas fa-user">{{ $errors->first('name') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    @if ($errors->has('name'))
-                        <span>{{ $errors->first('name') }}</span>
-                    @endif
+
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email" name="email">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                @if ($errors->has('email'))
+                                    <span>{{ $errors->first('email') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    @if ($errors->has('email'))
-                        <span>{{ $errors->first('email') }}</span>
-                    @endif
+
                     <div class="input-group mb-3">
                         <input type="password" class="form-control" placeholder="Password" name="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                                @if ($errors->has('password'))
+                                    <span>{{ $errors->first('password') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    @if ($errors->has('password'))
-                        <span>{{ $errors->first('password') }}</span>
-                    @endif
+
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">

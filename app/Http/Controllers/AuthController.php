@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 class AuthController extends Controller
@@ -42,8 +43,25 @@ class AuthController extends Controller
         return view('admin.auth.register');
     }
 
-    public function postRegister(Request $request)
+    // public function postRegister(Request $request)
+    // {
+    //     $user = new User();
+    //     $user->name = $request->name;
+    //     $user->email = $request->email;
+    //     $user->password = bcrypt($request->password);
+    //     $user->role = 0;
+    //     $user->status = 1;
+    //     // dd($user);
+    //     $user->save();
+    //     return redirect()->route('auth.getLogin');
+    // }
+    public function postRegister(RegisterRequest $request)
     {
+        $request->validate([
+            'name' => 'required|min:6|max:32',
+            'email' => 'required|min:6|max:32|email',
+            'password' => 'required|min:6',
+        ]);
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -52,6 +70,7 @@ class AuthController extends Controller
         $user->status = 1;
         // dd($user);
         $user->save();
+        session()->flash('success', 'Bạn đã đăng ký người dùng thành công');
         return redirect()->route('auth.getLogin');
     }
 }

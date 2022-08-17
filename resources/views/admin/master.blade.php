@@ -34,7 +34,7 @@
                     <a href="" class="nav-link">Contact</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{asset('/auth/logout')}}" class="nav-link">Logout</a>
+                    <a href="{{ asset('/auth/logout') }}" class="nav-link">Logout</a>
                 </li>
             </ul>
 
@@ -271,6 +271,23 @@
                             <a href="" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
+                                    Comment
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ asset('/admin/comment') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Danh sách bình luận</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
                                     Đơn hàng
                                 </p>
                             </a>
@@ -290,6 +307,16 @@
             </div>
             <!-- /.sidebar -->
         </aside>
+        @if (session()->has('success'))
+            <div class="alert alert-success text-center">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+        @if (session()->has('false'))
+            <div class="alert alert-success text-center">
+                {{ session()->get('false') }}
+            </div>
+        @endif
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

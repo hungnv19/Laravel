@@ -5,7 +5,8 @@
 @section('content-title', 'Quản lý sản phẩm')
 
 @section('content')
-    <form action="{{ isset($category) ? route('admin.category.update', $category->id) : route('admin.category.store') }}
+    <form
+        action="{{ isset($category) ? route('admin.category.update', $category->id) : route('admin.category.store') }}
     "
         method="POST">
         @csrf
@@ -16,6 +17,9 @@
             <label for="">Tên Danh mục</label>
             <input type="text" name='name' class='form-control'
                 value="{{ isset($category) ? $category->name : old('name') }}">
+            @if ($errors->has('name'))
+                <span class="text-danger">{{ $errors->first('name') }}</span>
+            @endif
         </div>
 
         <div>

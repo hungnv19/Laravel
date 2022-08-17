@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Product;
 
 use Illuminate\Http\Request;
@@ -22,12 +23,15 @@ class ClientController extends Controller
             ->where('category.name', '=', 'sofa')->limit(1)
             ->get();
         // dd($sofa);
-        return view('client.shop', ['product' => $products, 'product_2' => $products_2, 'sofa' => $sofa]);
+        return view('layout.master', ['product' => $products, 'product_2' => $products_2, 'sofa' => $sofa]);
     }
     public function productDetail(Product $id)
     {
+        $comment = Comment::select('id', 'content', 'user_id', 'product_id')->where('product_id', $id->id)
+        ->orderBy('id', 'desc')->with('user')->with('product')->paginate(10);
         return view('client.shop-detail', [
             'product' => $id,
+            'comments' => $comment,
         ]);
     }
     public function product()

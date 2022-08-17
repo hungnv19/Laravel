@@ -139,7 +139,7 @@
                                                 </div>
                                                 <div class="product__cart__item__text">
                                                     <h6>{{ $item->product->name }}</h6>
-                                                    <h5>{{ $item->product->price }}</h5>
+                                                    <h5 >{{ $item->product->price }}</h5>
                                                 </div>
                                             </td>
                                             <td class="quantity__item">

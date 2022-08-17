@@ -3,15 +3,7 @@
 @section('content')
     <div class="login-box">
         <!-- /.login-logo -->
-        <div>
-            @if ($errors->any())
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-        </div>
+      
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Đăng nhập để bắt đầu phiên của bạn</p>
@@ -22,21 +14,21 @@
                         <input type="email" class="form-control" placeholder="Email" name="email">
 
                         <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
+                            @if ($errors->has('email'))
+                                <span class="fas fa-envelope">{{ $errors->first('email') }}</span>
+                            @endif
                         </div>
 
                     </div>
-                    {{-- @if ($errors->has('email'))
-                        <span>{{ $errors->first('email') }}</span>
-                    @endif --}}
+
                     <div class="input-group mb-3">
                         <input type="password" class="form-control" placeholder="Password" name="password">
 
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                                @if ($errors->has('password'))
+                                    <span class="fas fa-lock">{{ $errors->first('password') }}</span>
+                                @endif
                             </div>
                         </div>
 

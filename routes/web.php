@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 
 use App\Models\Category;
 
@@ -34,9 +35,7 @@ Route::get('/blog', function () {
 });
 
 Route::prefix('/')->name('')->group(function () {
-    Route::get('/', function () {
-        return view('layout.master');
-    });
+    Route::get('/', [ClientController::class, 'index'])->name('home');
     Route::get('/product-detail/{id}', [ClientController::class, 'productDetail'])->name('productDetail');
     Route::get('/product', [ClientController::class, 'product'])->name('product');
     Route::get('/categoryProducts/{id}', [ClientController::class, 'categoryProducts'])->name('categoryProducts');
@@ -47,6 +46,11 @@ Route::prefix('/')->name('')->group(function () {
         Route::get('/delete/{id}', [CartController::class, 'delete'])->name('delete');
         
     });
+    
+    // bình luận 
+    Route::post('/comment/{id}', [CommentController::class, 'create'])->name('comment');
+    // // liên hệ
+    // Route::post('/lien-he', [LienHeController::class, 'create'])->name('lienHe');
 });
 
 
@@ -71,7 +75,15 @@ Route::middleware('admin')->prefix('/admin')->name('admin.')->group(function () 
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
         Route::put('/update/{product}', [ProductController::class, 'update'])->name('update');
     });
-
+    //comment
+    Route::prefix('/comment')->name('comments.')->group(function () {
+        Route::get('/', [CommentController::class, 'index'])->name('list');
+        Route::get('/create', [CommentController::class, 'getCreate'])->name('getCreate');
+        Route::post('/create', [CommentController::class, 'postCreate'])->name('postCreate');
+        Route::get('/edit/{id}', [CommentController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [CommentController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [CommentController::class, 'delete'])->name('delete');
+    });
 
     //category
     Route::prefix('/category')->name('category.')->group(function () {

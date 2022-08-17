@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
@@ -20,7 +21,7 @@ class CategoryController extends Controller
     {
         return view('admin.category.create');
     }
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $category = new Category();
         $category->fill([
@@ -35,17 +36,40 @@ class CategoryController extends Controller
             'category' => $category
         ]);
     }
-    public function update(Request $request, Category $category)
-    {
-        $category->find($request->id)->update($request->all());
-        $category->save();
+    // public function update(Request $request, Category $category)
+    // {
+    //     $category->find($request->id)->update($request->all());
+    //     $category->save();
+    //     return redirect()->route('admin.category.list');
+    // }
+    public function update(CategoryRequest $request){
+        $request->validate([
+            'name' => 'required|min:6|max:32',
+        ]);
+        $data = Category::find($request->id);
+        $data->update(['name' => $request->name]);
+        session()->flash('success', 'Bạn Cập nhật thành công!');
         return redirect()->route('admin.category.list');
+
     }
-    public function delete(Request $request)
+    // public function delete(Request $request)
+    // {
+    //     Category::destroy($request->id);
+    //     return redirect()->route('admin.category.list');
+    // }
+    public function delete(Category $id)
     {
-        Category::destroy($request->id);
-        return redirect()->route('admin.category.list');
+        // $products = Product::where('category_id', $id)->get();
+        // foreach ($products as $item) {
+        //     $item->category_id = 9;
+        //     $item->save();
+        // }
+        if ($id->delete()) {
+            session()->flash('success', 'Bạn xóa thành công!');
+            return redirect()->back();
+        }
     }
+    
     public function fill_category(Request $request)
     {
         $category = Category::all();

@@ -87,7 +87,7 @@
                             <!-- Auth::user() trả về thể hiện của model User chứa thông tin đã đăng nhập -->
                             {{ Auth::user()->name }}
                         @endif
-                        <a href="{{asset('auth/logout')}}"><img src="img/icon/heart.png" alt=""></a>
+                        <a href="{{ asset('auth/logout') }}"><img src="img/icon/heart.png" alt=""></a>
                         <a href="{{ asset('/cart') }}"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
                         <div class="price">$0.00</div>
                     </div>
@@ -226,6 +226,7 @@
                         <li data-filter=".hot-sales">Hot Sales</li>
                     </ul>
                 </div>
+              
             </div>
             <div class="row product__filter">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
