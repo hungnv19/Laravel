@@ -54,21 +54,17 @@ class ProductController extends Controller
 
         ]);
         
-        // 1. Khởi tạo đối tượng user mới
+        
         $product = new Product();
-        // 2. Cập nhật giá trị cho các thuộc tính của $user
-        // $user->name = $request->name;
-        // $user->phone = $request->phone;
-        $product->fill($request->all()); // đặt name ở form cùng giá trị với thuộc tính
+       
+        $product->fill($request->all()); 
         // 3. Xử lý file avatar gửi lên
         if($request->hasFile('avatar')) {
-            // Nếu trường avatar có file thì sẽ trả về true
-            // 3.1 Xử lý tên file
+          
             $avatar = $request->avatar;
             $avatarName = $avatar->hashName();
             $avatarName = $request->username . '_' . $avatarName;
-            // dd($avatar->storeAs('images/users', $avatarName));
-            // 3.2 Lưu file và gán đường dẫn cho $user->avatar
+           
             $product->avatar = $avatar->storeAs('images/users', $avatarName);
            
         } else {
@@ -78,8 +74,7 @@ class ProductController extends Controller
         $product->save();
         session()->flash('success', 'Tạo mới sản phẩm thành công!');
         return redirect()->route('admin.product.list');
-        // Lab: Thực hiện chức năng chỉnh sửa, method PUT, có dữ liệu của user hiện tại và lưu
-
+        
     }
     public function edit(Request $request)
     {

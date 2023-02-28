@@ -49,8 +49,7 @@ Route::prefix('/')->name('')->group(function () {
     
     // bình luận 
     Route::post('/comment/{id}', [CommentController::class, 'create'])->name('comment');
-    // // liên hệ
-    // Route::post('/lien-he', [LienHeController::class, 'create'])->name('lienHe');
+    
 });
 
 
